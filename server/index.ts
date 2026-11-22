@@ -15,7 +15,7 @@ app.disable('x-powered-by');
 app.use(express.json({ limit: '32kb' }));
 
 function text(value: unknown, max: number): string { return typeof value === 'string' ? value.trim().slice(0, max) : ''; }
-function baseUrl(req: Request): string { const configured = text(process.env.APP_URL, 300); if (configured) return configured.replace(/\/$/, ''); const proto = text(req.header('x-forwarded-proto'), 20) || req.protocol; const host = text(req.header('x-forwarded-host'), 200) || req.get('host') || 'localhost:3000'; return `${proto}://${host}`.replace(/\/$/, ''); }
+function baseUrl(req: Request): string { const configured = text(process.env.APP_URL, 300) || 'https://casasangra-te4foniu.manus.space'; if (configured) return configured.replace(/\/$/, ''); const proto = text(req.header('x-forwarded-proto'), 20) || req.protocol; const host = text(req.header('x-forwarded-host'), 200) || req.get('host') || 'localhost:3000'; return `${proto}://${host}`.replace(/\/$/, ''); }
 function mapProduct(product: ProductRecord | CatalogItem): Record<string, unknown> { return { ...product, price: Number(product.price) }; }
 async function saveOrder(order: StoredOrder): Promise<void> { memoryOrders.set(order.id, order); if (databaseReady()) { try { await insertOrder(order); } catch (error) { console.error('Falha ao persistir pedido:', error); } } }
 async function updatePreference(id: string, preferenceId: string): Promise<void> { const memory = memoryOrders.get(id); if (memory) memory.preferenceId = preferenceId; if (databaseReady()) { try { await setPreference(id, preferenceId); } catch (error) { console.error('Falha ao salvar preferência:', error); } } }
