@@ -13,4 +13,4 @@ COPY --from=build /app/dist-server ./dist-server
 COPY index.html style.css app.js admin.html admin.css admin.js manus-routes.json ./
 COPY img ./img
 EXPOSE 3000
-CMD ["node", "dist-server/server/index.js"]
+CMD ["node", "dist-server/server/local.js"]

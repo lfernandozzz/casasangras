@@ -5,7 +5,6 @@ import { catalog, catalogById, type CatalogItem } from './catalog.js';
 import { databaseReady, findOrder, findOrderByPaymentReference, findProduct, initDatabase, insertOrder, insertProduct, listOrders, listProducts, setFulfillment, setPayment, setPreference, setProductActive, updateProduct, type ProductRecord, type StoredOrder } from './db.js';
 
 const app = express();
-const port = Number(process.env.PORT ?? 3000);
 const root = process.cwd();
 const memoryOrders = new Map<string, StoredOrder>();
 const memoryProducts = new Map(catalog.map((product) => [product.id, { ...product, active: true }]));
@@ -13,6 +12,11 @@ const allowedFulfillment = new Set(['waiting', 'preparing', 'ready', 'delivered'
 
 app.disable('x-powered-by');
 app.use(express.json({ limit: '32kb' }));
+export const databaseInitialization = initDatabase();
+app.use(async (_req, _res, next) => {
+  await databaseInitialization;
+  next();
+});
 
 function text(value: unknown, max: number): string { return typeof value === 'string' ? value.trim().slice(0, max) : ''; }
 function baseUrl(req: Request): string { const configured = text(process.env.APP_URL, 300) || 'https://casasangra-te4foniu.manus.space'; if (configured) return configured.replace(/\/$/, ''); const proto = text(req.header('x-forwarded-proto'), 20) || req.protocol; const host = text(req.header('x-forwarded-host'), 200) || req.get('host') || 'localhost:3000'; return `${proto}://${host}`.replace(/\/$/, ''); }
@@ -78,12 +82,5 @@ app.get('/admin.css', (_req, res) => res.sendFile(path.join(root, 'admin.css')))
 app.get('/admin.js', (_req, res) => res.sendFile(path.join(root, 'admin.js')));
 app.get('/manus-routes.json', (_req, res) => res.sendFile(path.join(root, 'manus-routes.json')));
 app.use('/img', express.static(path.join(root, 'img'), { dotfiles: 'deny', fallthrough: false }));
-
-if (process.env.VERCEL !== '1') {
-  await initDatabase();
-  app.listen(port, '0.0.0.0', () => console.log(`Casas Angra server listening on ${port}`));
-} else {
-  void initDatabase();
-}
 
 export default app;
