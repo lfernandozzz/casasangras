@@ -9,7 +9,7 @@ Configure no ambiente protegido do projeto:
 - `MP_ACCESS_TOKEN`: Access Token da aplicação no Mercado Pago.
 - `MP_WEBHOOK_SECRET`: chave secreta criada em Webhooks para validar a assinatura `x-signature`.
 - `APP_URL`: URL HTTPS pública do site quando o domínio final estiver definido.
-- `MP_MODE=test` durante os testes; use `production` somente após validar a integração.
+- `MP_MODE=test` durante os testes; use `production` com o Access Token de produção. Se a variável ficar vazia, o backend também reconhece tokens `TEST-...` como teste e tokens `APP_USR-...` como produção.
 
 Nunca coloque esses valores em `index.html`, `app.js`, no repositório ou em mensagens de chat.
 
