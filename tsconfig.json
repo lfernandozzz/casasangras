@@ -11,5 +11,5 @@
     "skipLibCheck": true,
     "noEmitOnError": true
   },
-  "include": ["server/**/*.ts"]
+  "include": ["index.ts", "server/**/*.ts"]
 }

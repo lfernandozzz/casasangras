@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#113b2b">
+  <meta name="description" content="Descubra mesa posta, utensílios e decoração na Casas Angra, em Miranda do Norte.">
+  <title>Casas Angra | Casa &amp; Decoração</title>
+  <link rel="icon" href="/img/marca.png">
+  <link rel="stylesheet" href="/style.css">
+  <script defer src="/app.js"></script>
+</head>
+<body>
+  <div class="top"><a href="#natal">Natal na Casas Angra</a></div>
+  <header>
+    <div class="head wrap">
+      <a class="brand" href="#" aria-label="Casas Angra, início"><img src="/img/marca.png" alt="Logo Casas Angra"><span>Casas <strong>Angra</strong></span></a>
+      <form class="search" role="search">
+        <label class="sr" for="search">Buscar produtos</label>
+        <input type="search" id="search" placeholder="Busque por pratos, taças, decoração…" autocomplete="off">
+        <button aria-label="Buscar" type="submit"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4 4"/></svg></button>
+      </form>
+      <div class="head-actions">
+        <a class="visit" href="#loja">Visite a loja</a>
+        <button class="cart-toggle" type="button" aria-haspopup="dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2.4 10h10.9l2.1-7H6M10 20h.01m7 0h.01"/><circle cx="10" cy="20" r="1"/><circle cx="17" cy="20" r="1"/></svg> Carrinho <span class="cart-count">0</span></button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero wrap holiday-hero" aria-labelledby="title">
+      <div class="hero-copy">
+        <p class="eyebrow">NATAL CASAS ANGRA</p>
+        <h1 id="title">O Natal começa<br><em>em casa.</em></h1>
+        <p>Da árvore iluminada à mesa da ceia, encontre os detalhes para receber quem você ama.</p>
+        <div class="holiday-links"><a class="btn holiday-btn" href="#natal">Ver coleção de Natal</a><a class="holiday-all" href="#catalogo">Explorar catálogo</a></div>
+      </div>
+      <div class="hero-img"><img src="/img/natal-capa.webp" alt="Mesa de Natal com louças verdes, guardanapos vermelhos e árvore iluminada ao fundo" fetchpriority="high"><span>Especial de Natal</span></div>
+    </section>
+
+    <section class="catalog wrap" id="catalogo" aria-labelledby="catalog-title">
+      <div class="section-head"><div><p class="eyebrow">ENCONTRE POR CATEGORIA</p><h2 id="catalog-title">Escolhas para sua casa</h2></div><p class="caption">Preços ilustrativos. Consulte valores e disponibilidade pelo WhatsApp.</p></div>
+      <div class="filters" aria-label="Filtrar por categoria"></div>
+      <p class="count" aria-live="polite"></p>
+      <div class="grid"></div>
+    </section>
+
+    <section class="holiday-section wrap" id="natal" aria-labelledby="holiday-title">
+      <div class="section-head"><div><p class="eyebrow">NATAL CASAS ANGRA</p><h2 id="holiday-title">Especial de Natal</h2></div><p class="caption">Preços ilustrativos. Consulte a disponibilidade pelo WhatsApp.</p></div>
+      <div class="grid holiday-grid"></div>
+    </section>
+
+    <section class="location wrap" id="loja">
+      <div class="location-photo" role="img" aria-label="Composição de mesa do perfil Casas Angra"></div>
+      <div class="location-copy"><p class="eyebrow">NOSSA LOJA</p><h2>Visite a Casas Angra</h2><p>Rua do Sol, Centro<br>Miranda do Norte – MA</p><a class="btn" href="https://www.google.com/maps/dir/?api=1&amp;destination=Casas+Angra%2C+Rua+do+Sol%2C+Centro%2C+Miranda+do+Norte%2C+MA" target="_blank" rel="noopener">Traçar rota no Google Maps</a></div>
+    </section>
+  </main>
+
+  <footer><div class="wrap foot"><a class="brand" href="#"><img src="/img/marca.png" alt="Logo Casas Angra"><span>Casas <strong>Angra</strong></span></a><nav aria-label="Redes sociais"><a href="https://www.instagram.com/casas_angra/" target="_blank" rel="noopener">Instagram</a><a href="https://wa.me/message/2GJCDQNNVJ3YB1" target="_blank" rel="noopener">WhatsApp</a></nav><p>Miranda do Norte – MA</p></div></footer>
+  <a class="float" href="https://wa.me/message/2GJCDQNNVJ3YB1" target="_blank" rel="noopener" aria-label="Fale com a Casas Angra no WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.6 11.8a8.6 8.6 0 0 1-12.8 7.5L3 20.6l1.3-4.5a8.6 8.6 0 1 1 16.3-4.3Z"/><path d="M8 8c-.5 2.3 2.8 6.2 5.1 6.9 1.4.5 2.4-.1 2.8-1.2l-2.2-1.1-.9.9c-1.4-.5-2.4-1.5-3-2.9l.8-.9-.9-2.1c-.7-.4-1.3-.2-1.7.4Z"/></svg></a>
+
+  <dialog id="product-dialog" aria-labelledby="order-title">
+    <button type="button" class="close" aria-label="Fechar">×</button>
+    <div class="product-sheet">
+      <img id="order-image" alt="">
+      <h2 id="order-title" tabindex="-1"></h2>
+      <p class="sheet-price"><strong id="order-price"></strong> <span>Preço ilustrativo</span></p>
+      <p id="order-desc"></p>
+      <div class="product-actions">
+        <button type="button" class="btn add-cart">Adicionar ao carrinho</button>
+        <button type="button" class="btn secondary buy-now">Comprar agora</button>
+        <button type="button" class="btn secondary show-order">Consultar no WhatsApp</button>
+      </div>
+    </div>
+    <form class="order" hidden>
+      <div class="fields"><label>Seu nome<input name="nome" required maxlength="80" autocomplete="given-name" placeholder="Como podemos chamar você?"></label><label>Quantidade<input name="quantidade" type="number" required min="1" max="999" value="1"></label></div>
+      <label>Cidade <small>(opcional)</small><input name="cidade" maxlength="80" autocomplete="address-level2" placeholder="Ex.: Miranda do Norte"></label>
+      <p class="caption">Seus dados vão na mensagem que você poderá revisar e enviar pelo WhatsApp.</p>
+      <button class="btn" type="submit">Continuar no WhatsApp</button>
+    </form>
+  </dialog>
+
+  <dialog id="cart-dialog" aria-labelledby="cart-title">
+    <button type="button" class="close" aria-label="Fechar carrinho">×</button>
+    <h2 id="cart-title" tabindex="-1">Seu carrinho</h2>
+    <p class="empty-cart" hidden>Seu carrinho está vazio.</p>
+    <ul class="cart-items"></ul>
+    <p class="cart-summary" hidden><span>Subtotal estimado</span><strong class="cart-total"></strong></p>
+    <p class="cart-note caption" hidden>Preços ilustrativos. A loja confirma os valores e a disponibilidade pelo WhatsApp.</p>
+    <button type="button" class="btn checkout-cart" hidden>Finalizar pedido</button>
+    <form class="cart-order order" hidden>
+      <label>Seu nome<input name="nome" required maxlength="80" autocomplete="given-name" placeholder="Como podemos chamar você?"></label>
+      <label>Cidade <small>(opcional)</small><input name="cidade" maxlength="80" autocomplete="address-level2" placeholder="Ex.: Miranda do Norte"></label>
+      <button class="btn" type="submit">Enviar pedido pelo WhatsApp</button>
+      <button class="btn secondary payment-btn" type="button">Pagar com Mercado Pago</button>
+      <p class="payment-feedback caption" role="status" aria-live="polite"></p>
+    </form>
+    <button type="button" class="btn secondary keep-shopping">Continuar comprando</button>
+  </dialog>
+  <div class="cart-feedback" role="status"></div>
+</body>
+</html>

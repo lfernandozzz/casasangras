@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="pt-BR">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Admin | Casas Angra</title><link rel="stylesheet" href="/admin.css"><script defer src="/admin.js"></script></head>
+<body>
+  <main class="admin-shell">
+    <section id="login-view" class="panel login-panel"><p class="eyebrow">CASAS ANGRA</p><h1>Central administrativa</h1><p>Entre para gerenciar o catálogo e acompanhar os pedidos.</p><form id="login-form"><label>Senha administrativa<input name="password" type="password" autocomplete="current-password" required></label><button class="primary" type="submit">Entrar</button><p id="login-message" class="message" role="alert"></p></form></section>
+    <section id="admin-view" hidden>
+      <header class="admin-header"><div><p class="eyebrow">CASAS ANGRA</p><h1>Central administrativa</h1></div><button id="logout-button" class="secondary">Sair</button></header>
+      <nav class="tabs"><button class="tab active" data-tab="orders">Pedidos</button><button class="tab" data-tab="products">Produtos</button></nav>
+      <section id="orders-tab" class="panel tab-panel"><div class="section-title"><div><p class="eyebrow">ACOMPANHAMENTO</p><h2>Pedidos</h2></div><select id="order-filter"><option value="">Todos os pedidos</option><option value="waiting">Lista de espera</option><option value="preparing">Em separação</option><option value="ready">Pronto</option><option value="delivered">Entregue</option><option value="cancelled">Cancelado</option></select></div><div id="orders-list" class="orders-list"></div></section>
+      <section id="products-tab" class="panel tab-panel" hidden><div class="section-title"><div><p class="eyebrow">CATÁLOGO</p><h2>Produtos</h2></div><button id="new-product" class="primary">Novo produto</button></div><form id="product-form" class="product-form" hidden><input name="id" type="hidden"><div class="form-grid"><label>Código<input name="code" required maxlength="20" placeholder="EX01"></label><label>Nome<input name="name" required maxlength="120"></label><label>Preço<input name="price" required min="0.01" step="0.01" type="number"></label><label>Categoria<input name="category" required maxlength="50" placeholder="Decoração"></label><label>Imagem<input name="image" required maxlength="500" placeholder="nome-do-arquivo ou URL HTTPS"></label><label>Descrição<textarea name="description" required maxlength="500"></textarea></label></div><div class="form-actions"><button class="primary" type="submit">Salvar produto</button><button id="cancel-product" class="secondary" type="button">Cancelar</button></div><p id="product-message" class="message"></p></form><div id="products-list" class="products-list"></div></section>
+    </section>
+  </main>
+</body>
+</html>
