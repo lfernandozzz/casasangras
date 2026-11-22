@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Ilustração Casas Angra">
+      <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#e5ede2"/><stop offset="1" stop-color="#f8f4eb"/></linearGradient><filter id="s"><feDropShadow dx="0" dy="18" stdDeviation="18" flood-opacity=".14"/></filter></defs>
+      <rect width="800" height="600" fill="url(#bg)"/>
+      <circle cx="690" cy="80" r="130" fill="#ffffff" opacity=".3"/><circle cx="110" cy="520" r="170" fill="#d4e4d5" opacity=".45"/>
+      <g filter="url(#s)"><rect x="0" y="365" width="800" height="95" fill="#a77052"/><ellipse cx="400" cy="368" rx="330" ry="70" fill="#f8f4ea"/><ellipse cx="400" cy="371" rx="260" ry="48" fill="#d8e5d7"/><circle cx="260" cy="365" r="82" fill="#fffdf5" stroke="#217652" stroke-width="14"/><circle cx="540" cy="365" r="82" fill="#fffdf5" stroke="#217652" stroke-width="14"/><path d="M350 365h100M400 315v100" stroke="#c7d8c9" stroke-width="7"/><path d="M110 185h80v210h-80zM610 185h80v210h-80z" fill="#9c2638" opacity=".86"/><path d="M130 185l20-55 20 55M630 185l20-55 20 55" fill="#217652"/><path d="M220 425q35-130 70-130t70 130M440 425q35-130 70-130t70 130" fill="none" stroke="#f1dfaa" stroke-width="14"/></g>
+      <path d="M0 498 Q220 450 430 498 T800 480 V600 H0Z" fill="#d5dfd2" opacity=".75"/>
+    </svg>

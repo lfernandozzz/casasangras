@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Ilustração Casas Angra">
+      <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#eee7dc"/><stop offset="1" stop-color="#f8f4eb"/></linearGradient><filter id="s"><feDropShadow dx="0" dy="18" stdDeviation="18" flood-opacity=".14"/></filter></defs>
+      <rect width="800" height="600" fill="url(#bg)"/>
+      <circle cx="690" cy="80" r="130" fill="#ffffff" opacity=".3"/><circle cx="110" cy="520" r="170" fill="#d4e4d5" opacity=".45"/>
+      <g filter="url(#s)"><rect x="205" y="210" width="390" height="260" rx="12" fill="#9c2638" stroke="#123c2c" stroke-width="12"/><path d="M220 225h360v230H220Z" fill="none" stroke="#f1dfaa" stroke-width="10" stroke-dasharray="16 14"/><path d="M280 280l35-35 35 35-35 35zM450 390l35-35 35 35-35 35z" fill="#217652" stroke="#f1dfaa" stroke-width="8"/></g>
+      <path d="M0 498 Q220 450 430 498 T800 480 V600 H0Z" fill="#d5dfd2" opacity=".75"/>
+    </svg>
