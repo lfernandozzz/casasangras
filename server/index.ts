@@ -7,7 +7,6 @@ import { databaseReady, findOrder, findOrderByPaymentReference, findProduct, ini
 const app = express();
 const port = Number(process.env.PORT ?? 3000);
 const root = process.cwd();
-const publicRoot = path.join(root, 'public');
 const memoryOrders = new Map<string, StoredOrder>();
 const memoryProducts = new Map(catalog.map((product) => [product.id, { ...product, active: true }]));
 const allowedFulfillment = new Set(['waiting', 'preparing', 'ready', 'delivered', 'cancelled']);
@@ -71,14 +70,14 @@ app.patch('/api/admin/products/:id/active', requireAdmin, async (req, res) => { 
 app.get('/api/admin/orders', requireAdmin, async (req, res) => { if (!databaseReady()) return res.status(503).json({ error: 'Banco indisponível.' }); const status = text(req.query.status, 30); return res.json((await listOrders(status || undefined)).map(publicOrder)); });
 app.patch('/api/admin/orders/:id', requireAdmin, async (req, res) => { if (!databaseReady()) return res.status(503).json({ error: 'Banco indisponível.' }); const id = text(req.params.id, 80); if (typeof req.body?.fulfillmentStatus === 'string') { const status = text(req.body.fulfillmentStatus, 30); if (!allowedFulfillment.has(status)) return res.status(400).json({ error: 'Status de entrega inválido.' }); await setFulfillment(id, status); } if (typeof req.body?.paymentStatus === 'string') { const status = text(req.body.paymentStatus, 30); if (!['pending', 'approved', 'authorized', 'rejected', 'refunded', 'cancelled'].includes(status)) return res.status(400).json({ error: 'Status de pagamento inválido.' }); await setPayment(id, status, 'admin'); } return res.json({ ok: true }); });
 
-app.get('/', (_req, res) => res.sendFile(path.join(publicRoot, 'index.html')));
-app.get('/admin', (_req, res) => res.sendFile(path.join(publicRoot, 'admin.html')));
-app.get('/style.css', (_req, res) => res.sendFile(path.join(publicRoot, 'style.css')));
-app.get('/app.js', (_req, res) => res.sendFile(path.join(publicRoot, 'app.js')));
-app.get('/admin.css', (_req, res) => res.sendFile(path.join(publicRoot, 'admin.css')));
-app.get('/admin.js', (_req, res) => res.sendFile(path.join(publicRoot, 'admin.js')));
-app.get('/manus-routes.json', (_req, res) => res.sendFile(path.join(publicRoot, 'manus-routes.json')));
-app.use(express.static(publicRoot, { dotfiles: 'deny', fallthrough: true }));
+app.get('/', (_req, res) => res.sendFile(path.join(root, 'index.html')));
+app.get('/admin', (_req, res) => res.sendFile(path.join(root, 'admin.html')));
+app.get('/style.css', (_req, res) => res.sendFile(path.join(root, 'style.css')));
+app.get('/app.js', (_req, res) => res.sendFile(path.join(root, 'app.js')));
+app.get('/admin.css', (_req, res) => res.sendFile(path.join(root, 'admin.css')));
+app.get('/admin.js', (_req, res) => res.sendFile(path.join(root, 'admin.js')));
+app.get('/manus-routes.json', (_req, res) => res.sendFile(path.join(root, 'manus-routes.json')));
+app.use('/img', express.static(path.join(root, 'img'), { dotfiles: 'deny', fallthrough: false }));
 
 if (process.env.VERCEL !== '1') {
   await initDatabase();
