@@ -31,6 +31,8 @@ const cartButton = document.querySelector('.cart-toggle');
 const cartItems = document.querySelector('.cart-items');
 const cartForm = document.querySelector('.cart-order');
 const checkoutCart = document.querySelector('.checkout-cart');
+const paymentButton = document.querySelector('.payment-btn');
+const paymentFeedback = document.querySelector('.payment-feedback');
 const cartStorageKey = 'casas-angra-cart';
 const maxQuantity = 999;
 const currency = new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL'});
@@ -101,7 +103,29 @@ cartItems.addEventListener('click',event=>{const button=event.target.closest('[d
 cartButton.addEventListener('click',()=>{cartForm.hidden=true;renderCart();cartDialog.showModal();cartDialog.querySelector('h2').focus();});
 for(const selector of ['.close','.keep-shopping'])cartDialog.querySelector(selector).addEventListener('click',()=>cartDialog.close());
 checkoutCart.addEventListener('click',()=>{checkoutCart.hidden=true;cartForm.hidden=false;cartForm.elements.nome.focus();});
+paymentButton.addEventListener('click',async()=>{
+  if(!cart.size)return;
+  const name=cartForm.elements.nome.value.trim();
+  if(!name){cartForm.elements.nome.setCustomValidity('Informe seu nome.');cartForm.elements.nome.reportValidity();return;}
+  cartForm.elements.nome.setCustomValidity('');
+  paymentButton.disabled=true;
+  paymentFeedback.textContent='Abrindo o checkout seguro…';
+  try{
+    const response=await fetch('/api/checkout/preferences',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({customer:{name,city:cartForm.elements.cidade.value.trim()},items:[...cart.entries()].map(([id,quantity])=>({id,quantity}))})});
+    const data=await response.json();
+    if(!response.ok||!data.checkoutUrl)throw new Error(data.error||'Não foi possível iniciar o pagamento.');
+    window.location.assign(data.checkoutUrl);
+  }catch(error){paymentFeedback.textContent=error instanceof Error?error.message:'Não foi possível iniciar o pagamento.';paymentButton.disabled=false;}
+});
 cartForm.elements.nome.addEventListener('input',()=>cartForm.elements.nome.setCustomValidity(''));
 cartForm.addEventListener('submit',event=>{event.preventDefault();if(!cart.size)return;const name=cartForm.elements.nome.value.trim();if(!name){cartForm.elements.nome.setCustomValidity('Informe seu nome.');cartForm.elements.nome.reportValidity();return;}const city=cartForm.elements.cidade.value.trim();const lines=products.filter(product=>cart.has(product.id)).map(product=>`${cart.get(product.id)}× ${product.name} (${product.id})`);openWhatsApp(['Olá, Casas Angra! Meu nome é '+name+'. Quero fazer este pedido pelo site:','',...lines,...(city?['',`Cidade: ${city}`]:[]),'','Podem confirmar os valores, a disponibilidade e as opções de pagamento?'].join('\n'));});
 products.filter(product=>product.category==='Natal').forEach((product,index)=>document.querySelector('.holiday-grid').append(createProductCard(product,index)));
 renderCart();render();
+const paymentState=new URLSearchParams(location.search).get('payment');
+if(paymentState){
+  const messages={success:'Pagamento aprovado. Obrigado pelo pedido!',pending:'Pagamento pendente. A loja confirmará a atualização em breve.',failure:'O pagamento não foi concluído. Você pode tentar novamente.'};
+  const feedback=document.querySelector('.cart-feedback');
+  feedback.textContent=messages[paymentState]||'';
+  if(feedback.textContent)setTimeout(()=>feedback.textContent='',6000);
+  history.replaceState({},'',location.pathname);
+}

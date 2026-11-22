@@ -20,3 +20,9 @@
 - [x] A seção especial de Natal exibe produtos temáticos.
 - [x] A seção da loja informa endereço, oferece rota no Google Maps e links para Instagram e WhatsApp.
 - [x] O botão flutuante de WhatsApp permanece disponível na página.
+
+## Pagamentos e segurança
+- [x] O frontend envia somente IDs e quantidades; o backend recalcula preços a partir do catálogo confiável.
+- [x] O backend TypeScript cria pedidos persistentes no banco gerenciado e gera preferências do Checkout Pro.
+- [x] O Webhook valida a assinatura HMAC do Mercado Pago e consulta o pagamento antes de atualizar o pedido.
+- [ ] Configurar as credenciais protegidas do Mercado Pago e a URL HTTPS pública do Webhook.
