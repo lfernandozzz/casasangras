@@ -25,4 +25,11 @@
 - [x] O frontend envia somente IDs e quantidades; o backend recalcula preços a partir do catálogo confiável.
 - [x] O backend TypeScript cria pedidos persistentes no banco gerenciado e gera preferências do Checkout Pro.
 - [x] O Webhook valida a assinatura HMAC do Mercado Pago e consulta o pagamento antes de atualizar o pedido.
-- [ ] Configurar as credenciais protegidas do Mercado Pago e a URL HTTPS pública do Webhook.
+- [x] As credenciais protegidas do Mercado Pago e do painel foram configuradas no ambiente, sem serem gravadas no código; o health check confirma `payment: true` e `admin: true`.
+- [ ] Confirmar no painel do Mercado Pago a URL HTTPS pública `https://casasangra-te4foniu.manus.space/api/payments/webhook`, com o evento de pagamentos habilitado, e validar a primeira notificação real.
+
+## Painel administrativo e operação
+- [x] `/admin` oferece login por senha, sessão HttpOnly com cookie compatível com o Preview HTTPS e proteção das APIs administrativas.
+- [x] O painel permite cadastrar, editar e ativar/desativar produtos sem editar o código; o catálogo público carrega apenas produtos ativos do banco.
+- [x] A central de pedidos lista pedidos e permite filtrar e atualizar status de pagamento e entrega (`waiting`, `preparing`, `ready`, `delivered` e `cancelled`).
+- [x] A imagem de publicação inclui os arquivos do painel, o manifesto declara `/admin` e o build do backend passou sem erros.

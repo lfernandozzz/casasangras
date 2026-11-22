@@ -10,7 +10,7 @@ ENV NODE_ENV=production
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 RUN corepack enable && pnpm install --prod --frozen-lockfile
 COPY --from=build /app/dist-server ./dist-server
-COPY index.html style.css app.js manus-routes.json ./
+COPY index.html style.css app.js admin.html admin.css admin.js manus-routes.json ./
 COPY img ./img
 EXPOSE 3000
 CMD ["node", "dist-server/server/index.js"]
