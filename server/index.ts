@@ -26,7 +26,7 @@ async function activeProductList(): Promise<Array<Record<string, unknown>>> { if
 async function findTrustedProduct(id: string): Promise<ProductRecord | CatalogItem | undefined> { if (databaseReady()) { try { return await findProduct(id); } catch (error) { console.error('Falha ao consultar produto:', error); } } return memoryProducts.get(id) ?? catalogById.get(id); }
 
 function normalizeProduct(body: any): CatalogItem {
-  const id = text(body?.id, 20).toUpperCase(); const name = text(body?.name, 120); const category = text(body?.category, 50); const rawImage = text(body?.image, 500); const image = /^https:\/\//i.test(rawImage) ? rawImage : rawImage.replace(/\.webp$/i, ''); const description = text(body?.description, 500); const price = Number(body?.price);
+  const id = text(body?.id, 20).toUpperCase(); const name = text(body?.name, 120); const category = text(body?.category, 50); const rawImage = text(body?.image, 500); const image = /^https:\/\//i.test(rawImage) ? rawImage : rawImage.replace(/\.webp$/i, ''); const description = text(body?.description, 500); const price = Number(String(body?.price ?? '').replace(',', '.'));
   if (!/^[A-Z0-9]{2,20}$/.test(id) || name.length < 2 || category.length < 2 || !(/^[a-z0-9-]+$/i.test(image) || /^https:\/\//i.test(image)) || description.length < 2 || !Number.isFinite(price) || price <= 0 || price > 100000) throw new Error('Preencha código, nome, preço, categoria, imagem e descrição válidos.');
   return { id, name, price: Math.round(price * 100) / 100, category, image, description };
 }
